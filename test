@@ -1,0 +1,16 @@
+Lua
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+
+humanoid.WalkSpeed   
+ = 0 -- Disable walking
+humanoid.JumpPower = 0 -- Disable jumping
+
+-- Adjust the following value to control the float speed
+local floatSpeed = 10
+
+while true do
+    humanoid.MoveTo(humanoid.RootPart.Position + Vector3.new(0, floatSpeed, 0))
+    wait(0.1)
+end
