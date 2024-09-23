@@ -1,0 +1,42 @@
+Roblox Flying Script with X to Start and Z to Stop
+Here's a script that allows you to start and stop flying by pressing the X and Z keys:
+
+Lua
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+
+local   
+ isFlying = false
+local floatSpeed = 10
+
+-- Function to start flying
+function startFlying()
+    isFlying = true
+    humanoid.WalkSpeed = 0
+    humanoid.JumpPower = 0
+end
+
+-- Function to stop flying
+function stopFlying()
+    isFlying = false
+    humanoid.WalkSpeed = 16 -- Adjust default walk speed
+    humanoid.JumpPower = 50 -- Adjust default jump power
+end
+
+-- Input handling
+player.InputBegan:Connect(function(inputObject)
+    if inputObject.KeyCode == Enum.KeyCode.X and not isFlying then
+        startFlying()
+    elseif inputObject.KeyCode == Enum.KeyCode.Z and isFlying then
+        stopFlying()
+    end
+end)
+
+-- Main loop for flying
+while true do
+    if isFlying then
+        humanoid.MoveTo(humanoid.RootPart.Position + Vector3.new(0, floatSpeed, 0))
+    end
+    wait(0.1)
+end
